@@ -1,17 +1,9 @@
 package com.revature.domain;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity 
@@ -26,26 +18,44 @@ public class Playlist {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="PLAYLIST_SEQ")
 	@SequenceGenerator(allocationSize=1,name="PlaylistSequence",sequenceName="SQ_PLAYLIST_PK")
 	@Column(name="P_ID")
-	
-	//@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	//@JoinColumn(name="U_ID")
-	
-	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="S_ID")
-	
-	//@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	//@JoinColumn(name="G_ID")
 	private int id;
 	
-	@Column(name="NAME")
+	@Column(name="P_NAME")
 	@NotNull
 	private String name;
 	
-	@Column(name="DESCRIPTION")
+	@Column(name="P_DESCRIPTION")
 	private String description;
 	
-	@Column(name="GENREID")
+	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@JoinColumn(name="G_ID")
 	private int genreId;
+	
+	@OneToMany(mappedBy="playlistId",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	private List<Comment> comments;
+	
+	private Set<User> owners;
+	
+	private Set<Song> songs;
+	
+	@ManyToMany(fetch=FetchType.LAZY,mappedBy="playlists")
+	public Set<User> getOwners(){
+		return this.owners;
+	}
+	
+	public void setOwners(Set<User> owners){
+		this.owners=owners;
+	}
+	
+	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinTable(name="PLAYLIST_SONG",joinColumns= {@JoinColumn(name="P_ID")},inverseJoinColumns= {@JoinColumn(name="S_ID")})
+	public Set<Song> getPlaylists(){
+		return this.songs;
+	}
+	
+	public void setSongs(Set<Song> songs){
+		this.songs=songs;
+	}
 
 	public int getId() {
 		return id;

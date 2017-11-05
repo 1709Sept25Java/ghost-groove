@@ -1,16 +1,8 @@
 package com.revature.domain;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import java.util.Set;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity 
@@ -25,11 +17,6 @@ public class Song {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="SONG_SEQ")
 	@SequenceGenerator(allocationSize=1,name="SongSequence",sequenceName="SQ_SONG_PK")
 	@Column(name="S_ID")
-	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="P_ID")
-	
-	//@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	//@JoinColumn(name="G_ID")
 	private int id;
 	
 	@Column(name="S_TITLE")
@@ -44,8 +31,20 @@ public class Song {
 	@NotNull
 	private int youtubeId;
 	
-	@Column(name="S_GENRE_ID")
+	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@JoinColumn(name="G_ID")
 	private int genreId;
+	
+	private Set<Playlist> playlists;
+	
+	@ManyToMany(fetch=FetchType.LAZY,mappedBy="songs")
+	public Set<Playlist> getPlaylists(){
+		return this.playlists;
+	}
+	
+	public void setOwners(Set<Playlist> playlists){
+		this.playlists=playlists;
+	}
 
 	public int getId() {
 		return id;
