@@ -27,6 +27,9 @@ public class Song {
 	@Column(name="S_ID")
 	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="P_ID")
+	
+	//@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	//@JoinColumn(name="G_ID")
 	private int id;
 	
 	@Column(name="S_TITLE")

@@ -24,8 +24,8 @@ public class Comment {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="COMMENT_SEQ")
 	@SequenceGenerator(allocationSize=1,name="CommentSequence",sequenceName="SQ_COMMENT_PK")
 	@Column(name="C_ID")
-	//@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	//@JoinColumn(name="P_ID")
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="P_ID")
 	private int id;
 	
 	@Column(name="P_ID")

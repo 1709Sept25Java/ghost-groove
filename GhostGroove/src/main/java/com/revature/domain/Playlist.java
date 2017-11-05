@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -31,6 +32,9 @@ public class Playlist {
 	
 	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="S_ID")
+	
+	//@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	//@JoinColumn(name="G_ID")
 	private int id;
 	
 	@Column(name="NAME")
