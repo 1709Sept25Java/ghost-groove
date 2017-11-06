@@ -1,6 +1,5 @@
 package com.revature.dao;
 
-<<<<<<< HEAD
 import java.util.List;
 
 import com.revature.domain.User;
@@ -41,8 +40,5 @@ public class UserDaoImpl implements UserDao {
 		
 		
 	}
-=======
-public class UserDaoImpl {
->>>>>>> 27a9c8d76bb278c071baa35349906e6f91467e69
-
+	
 }
