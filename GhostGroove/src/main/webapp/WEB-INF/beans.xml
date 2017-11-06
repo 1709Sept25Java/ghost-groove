@@ -19,7 +19,9 @@
 			<value></value> <!-- Wasn't sure what to put here since we're not using JSPs so we can ask later -->
 		</property>
 	</bean>
-	
+			<!-- Don't we have to change the connection url to generate the database. -->
+			<!-- so that when there are no datas, it will create these tables -->
+			
 	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
 		<property name="username" value="rebeca"></property>
