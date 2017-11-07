@@ -1,7 +1,6 @@
 package com.revature.domain;
 
 import java.util.Set;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 

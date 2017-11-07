@@ -1,5 +1,6 @@
 package com.revature.domain;
 
+
 import java.util.List;
 
 import javax.persistence.*;
@@ -25,13 +26,13 @@ public class Genre {
 	
 	@Column(name="G_DESCRIPTION")
 	private String description;
-	
+
 	@OneToMany(mappedBy="genreId",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private List<Playlist> playlists;
 	
 	@OneToMany(mappedBy="genreId",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private List<Song> songs;
-	
+
 	public int getId() {
 		return id;
 	}

@@ -11,6 +11,12 @@
 	<!-- Search for Beans -->
 	<context:component-scan base-package="com.revature"></context:component-scan>
 	
+	<!-- MVC Annotations -->
+	<mvc:annotation-driven></mvc:annotation-driven>
+	
+	<!-- Enable static resource retrieval -->
+	<mvc:resources location="/WEB-INF/static/" mapping="/static/**"></mvc:resources>
+	
 	<bean name="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
 			<value>/WEB-INF/pages/</value>
@@ -19,7 +25,7 @@
 			<value></value> <!-- Wasn't sure what to put here since we're not using JSPs so we can ask later -->
 		</property>
 	</bean>
-	
+			
 	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
 		<property name="username" value="rebeca"></property>
@@ -29,12 +35,13 @@
 	
 	<bean id="mySessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="myDataSource"></property>
-		<property name="packagesToScan" value="com.revature.beans"></property>
+		<property name="packagesToScan" value="com.revature.domain"></property>
 		<property name="hibernateProperties"> 
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
 			</props>
 		</property>
 	</bean>
