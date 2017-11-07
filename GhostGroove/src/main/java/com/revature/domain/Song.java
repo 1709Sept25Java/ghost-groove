@@ -13,8 +13,8 @@ public class Song {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="SONG_SEQ")
-	@SequenceGenerator(allocationSize=1,name="SongSequence",sequenceName="SQ_SONG_PK")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="songSequence")
+	@SequenceGenerator(allocationSize=1,name="songSequence",sequenceName="SQ_SONG_PK")
 	@Column(name="S_ID")
 	private int id;
 	
@@ -31,12 +31,13 @@ public class Song {
 	private int youtubeId;
 	
 	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
-	@JoinColumn(name="G_ID")
-	private int genreId;
-	
-	private Set<Playlist> playlists;
+	@JoinColumn(name="S_GENRE")
+	private Genre genre;
 	
 	@ManyToMany(fetch=FetchType.LAZY,mappedBy="songs")
+	private Set<Playlist> playlists;
+	
+	
 	public Set<Playlist> getPlaylists(){
 		return this.playlists;
 	}
@@ -77,11 +78,11 @@ public class Song {
 		this.youtubeId = youtubeId;
 	}
 
-	public int getGenreId() {
-		return genreId;
+	public Genre getGenreId() {
+		return genre;
 	}
 
-	public void setGenreId(int genreId) {
-		this.genreId = genreId;
+	public void setGenreId(Genre genre) {
+		this.genre = genre;
 	}
 }

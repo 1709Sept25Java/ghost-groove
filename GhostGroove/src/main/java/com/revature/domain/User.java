@@ -14,8 +14,8 @@ public class User {
 	}
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="USER_SEQ")
-	@SequenceGenerator(allocationSize=1,name="UserSequence",sequenceName="SQ_USER_PK")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="userSequence")
+	@SequenceGenerator(allocationSize=1,name="userSequence",sequenceName="SQ_USER_PK")
 	@Column(name="U_ID")
 	private int id;
 	
@@ -40,10 +40,10 @@ public class User {
 	@NotNull
 	private String isManager;
 	
-	private Set<Playlist> playlists;
-	
 	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinTable(name="USER_PLAYLIST",joinColumns= {@JoinColumn(name="U_ID")},inverseJoinColumns= {@JoinColumn(name="P_ID")})
+	private Set<Playlist> playlists;
+	
 	public Set<Playlist> getPlaylists(){
 		return this.playlists;
 	}

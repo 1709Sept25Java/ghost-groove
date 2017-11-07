@@ -15,8 +15,8 @@ public class Genre {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="GENRE_SEQ")
-	@SequenceGenerator(allocationSize=1,name="GenreSequence",sequenceName="SQ_GENRE_PK")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="genreSequence")
+	@SequenceGenerator(allocationSize=1,name="genreSequence",sequenceName="SQ_GENRE_PK")
 	@Column(name="G_ID")
 	private int id;
 	
@@ -27,10 +27,10 @@ public class Genre {
 	@Column(name="G_DESCRIPTION")
 	private String description;
 
-	@OneToMany(mappedBy="genreId",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="genre",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private List<Playlist> playlists;
 	
-	@OneToMany(mappedBy="genreId",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="genre",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private List<Song> songs;
 
 	public int getId() {

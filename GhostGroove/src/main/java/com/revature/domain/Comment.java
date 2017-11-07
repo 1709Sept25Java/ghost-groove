@@ -11,8 +11,8 @@ public class Comment {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="COMMENT_SEQ")
-	@SequenceGenerator(allocationSize=1,name="CommentSequence",sequenceName="SQ_COMMENT_PK")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="commentSequence")
+	@SequenceGenerator(allocationSize=1,name="commentSequence",sequenceName="SQ_COMMENT_PK")
 	@Column(name="C_ID")
 	private int id;
 	
@@ -20,8 +20,8 @@ public class Comment {
 	private String content;
 	
 	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
-	@JoinColumn(name="P_ID")
-	private int playlistId;
+	@JoinColumn(name="C_PLAYLIST")
+	private Playlist playlist;
 	
 	public int getId() {
 		return id;
@@ -29,11 +29,11 @@ public class Comment {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getPlaylistId() {
-		return playlistId;
+	public Playlist getPlaylist() {
+		return playlist;
 	}
-	public void setPlaylistId(int playlistId) {
-		this.playlistId = playlistId;
+	public void setPlaylist(Playlist playlist) {
+		this.playlist = playlist;
 	}
 	public String getContent() {
 		return content;

@@ -17,6 +17,8 @@
 	<!-- Enable static resource retrieval -->
 	<mvc:resources location="/WEB-INF/static/" mapping="/static/**"></mvc:resources>
 	
+	<mvc:view-controller path="/" view-name="landing"/>
+	
 	<bean name="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
 			<value>/WEB-INF/pages/</value>

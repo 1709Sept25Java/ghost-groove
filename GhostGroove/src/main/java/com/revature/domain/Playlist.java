@@ -15,8 +15,8 @@ public class Playlist {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="PLAYLIST_SEQ")
-	@SequenceGenerator(allocationSize=1,name="PlaylistSequence",sequenceName="SQ_PLAYLIST_PK")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="playlistSequence")
+	@SequenceGenerator(allocationSize=1,name="playlistSequence",sequenceName="SQ_PLAYLIST_PK")
 	@Column(name="P_ID")
 	private int id;
 	
@@ -28,17 +28,20 @@ public class Playlist {
 	private String description;
 	
 	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
-	@JoinColumn(name="G_ID")
-	private int genreId;
+	@JoinColumn(name="P_GENRE")
+	private Genre genre;
 	
-	@OneToMany(mappedBy="playlistId",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="playlist",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private List<Comment> comments;
 	
+	@ManyToMany(fetch=FetchType.LAZY,mappedBy="playlists")
 	private Set<User> owners;
 	
+	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinTable(name="PLAYLIST_SONG",joinColumns= {@JoinColumn(name="P_ID")},inverseJoinColumns= {@JoinColumn(name="S_ID")})
 	private Set<Song> songs;
 	
-	@ManyToMany(fetch=FetchType.LAZY,mappedBy="playlists")
+	
 	public Set<User> getOwners(){
 		return this.owners;
 	}
@@ -47,8 +50,7 @@ public class Playlist {
 		this.owners=owners;
 	}
 	
-	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinTable(name="PLAYLIST_SONG",joinColumns= {@JoinColumn(name="P_ID")},inverseJoinColumns= {@JoinColumn(name="S_ID")})
+	
 	public Set<Song> getPlaylists(){
 		return this.songs;
 	}
@@ -81,11 +83,11 @@ public class Playlist {
 		this.description = description;
 	}
 
-	public int getGenreId() {
-		return genreId;
+	public Genre getGenreId() {
+		return genre;
 	}
 
-	public void setGenreId(int genreId) {
-		this.genreId = genreId;
+	public void setGenreId(Genre genre) {
+		this.genre = genre;
 	}
 }
