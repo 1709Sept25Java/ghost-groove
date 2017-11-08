@@ -3,7 +3,7 @@ package com.revature.domain;
 import javax.persistence.*;
 
 @Entity 
-@Table(name="COMMENT")
+@Table(name="COMMENTS")
 public class Comment {
 	
 	public Comment() {

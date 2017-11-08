@@ -34,7 +34,7 @@ public class Playlist {
 	@OneToMany(mappedBy="playlist",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private List<Comment> comments;
 	
-	@ManyToMany(fetch=FetchType.LAZY,mappedBy="playlists")
+	@ManyToMany(mappedBy="playlists",fetch=FetchType.LAZY)
 	private Set<User> owners;
 	
 	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
