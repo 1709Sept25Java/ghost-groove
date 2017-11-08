@@ -11,22 +11,21 @@
 	<!-- Search for Beans -->
 	<context:component-scan base-package="com.revature"></context:component-scan>
 	
-	<!-- MVC Annotations -->
-	<mvc:annotation-driven></mvc:annotation-driven>
+	<!-- MVC Annotations and set up for JSON binding -->
+	<bean id="objectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean">
+	</bean>
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="objectMapper" ref="objectMapper"/>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
 	
 	<!-- Enable static resource retrieval -->
 	<mvc:resources location="/WEB-INF/static/" mapping="/static/**"></mvc:resources>
 	
 	<mvc:view-controller path="/" view-name="landing"/>
-	
-	<bean name="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix">
-			<value>/WEB-INF/pages/</value>
-		</property>
-		<property name="suffix">
-			<value></value> <!-- Wasn't sure what to put here since we're not using JSPs so we can ask later -->
-		</property>
-	</bean>
 			
 	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
