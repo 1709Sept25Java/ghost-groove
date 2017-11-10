@@ -1,0 +1,10 @@
+(function(){
+    app.directive("searchBox",function(){
+        return{
+            templateUrl:"../views/searchBox.html",
+            link:function(scope,elem,attrs){
+                console.log(scope);
+            }
+        }
+    });
+})();
