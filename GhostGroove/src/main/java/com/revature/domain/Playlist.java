@@ -1,5 +1,6 @@
 package com.revature.domain;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -8,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity 
 @Table(name="PLAYLIST")
-public class Playlist {
+public class Playlist implements Serializable{
 	
 	public Playlist() {
 		super();

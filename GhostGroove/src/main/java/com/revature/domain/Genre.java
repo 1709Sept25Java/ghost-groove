@@ -1,6 +1,7 @@
 package com.revature.domain;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity 
 @Table(name="GENRE")
-public class Genre {
+public class Genre implements Serializable{
 	
 	public Genre() {
 		super();

@@ -1,12 +1,13 @@
 package com.revature.domain;
 
+import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity 
 @Table(name="SONG")
-public class Song {
+public class Song implements Serializable{
 	
 	public Song() {
 		super();

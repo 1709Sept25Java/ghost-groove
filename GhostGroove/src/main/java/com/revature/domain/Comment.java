@@ -1,10 +1,12 @@
 package com.revature.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity 
 @Table(name="COMMENTS")
-public class Comment {
+public class Comment implements Serializable{
 	
 	public Comment() {
 		super();
