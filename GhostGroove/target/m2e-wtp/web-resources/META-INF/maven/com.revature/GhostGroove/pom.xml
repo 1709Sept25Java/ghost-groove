@@ -26,7 +26,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>4.2.5.RELEASE</version>
+			<version>4.0.4.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -72,11 +72,6 @@
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
-		</dependency>
-		<dependency>
-			<groupId>com.oracle.ojdbc</groupId>
-			<artifactId>ojdbc</artifactId>
-			<version>12.1.0.1</version>
 		</dependency>
 	</dependencies>
   
