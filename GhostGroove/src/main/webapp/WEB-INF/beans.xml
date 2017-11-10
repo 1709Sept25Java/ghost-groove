@@ -23,7 +23,12 @@
 	
 	<!-- Enable static resource retrieval -->
 	<mvc:resources location="/WEB-INF/static/" mapping="/static/**"></mvc:resources>
+	<mvc:resources location="/WEB-INF/static/views/" mapping="/views/**"></mvc:resources>
+	<mvc:resources location="/WEB-INF/static/styles/" mapping="/styles/**"></mvc:resources>
+	<mvc:resources location="/WEB-INF/static/scripts/" mapping="/scripts/**"></mvc:resources>
 	
+	<!-- Pages Mappings -->
 	<mvc:view-controller path="/" view-name="landing"/>
+	<mvc:view-controller path="/playlist" view-name="playlistview"/>
 
 </beans>
