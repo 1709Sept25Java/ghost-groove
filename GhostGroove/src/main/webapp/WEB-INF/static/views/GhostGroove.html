@@ -6,15 +6,26 @@
 <!-- bootstrap -->
 <meta charset="ISO-8859-1">
 <title>Ghost Groove</title>
+<link href="../GhostGroove/styles/bootstrap.min.css" />
 </head>
 <body>
-
+<h1>Ghost Groove</h1>
+<br>
 <div id="ytplayer" name="ytplayer"></div>
 
 <div id="commentTitle" name="commentTitle">Comments</div>
 <!-- Fill comment with comments from database, joined by playlistid -->
 <div id="commentBox" name="commentBox"></div>
 
+    <body ng-app="instantYoutubeSearch" ng-controller="youtubeController">
+        <div ui-view></div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.js"></script>
+        <script src="../GhostGroove/scripts/main.js"></script>
+        <script src="../GhostGroove/scripts/controller.js"></script>
+        <script src="../GhostGroove/scripts/searchBox.js"></script>
+        <script src="../GhostGroove/scripts/directive.js"></script>
 </body>
-<script src="../static/scripts/Playlist.js"></script>
+<script src="../GhostGroove/scripts/Playlist.js"></script>
 </html>

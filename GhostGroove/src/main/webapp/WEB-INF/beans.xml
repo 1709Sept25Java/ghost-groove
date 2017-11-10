@@ -29,6 +29,6 @@
 	
 	<!-- Pages Mappings -->
 	<mvc:view-controller path="/" view-name="landing"/>
-	<mvc:view-controller path="/playlist" view-name="playlistview"/>
+	<mvc:view-controller path="/queue" view-name="qview"/>
 
 </beans>

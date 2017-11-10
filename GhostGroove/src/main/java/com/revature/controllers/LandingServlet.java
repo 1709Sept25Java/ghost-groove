@@ -12,8 +12,8 @@ public class LandingServlet {
 	public String getMain() {
 		return "forward:/static/index.html";
 	}
-	@RequestMapping(value="/playlist",method=RequestMethod.GET)
-	public String getPlaylist() {
-		return "forward:/static/views/index.html";
+	@RequestMapping(value="/queue",method=RequestMethod.GET)
+	public String getQue() {
+		return "forward:/static/views/GhostGroove.html";
 	}
 }
