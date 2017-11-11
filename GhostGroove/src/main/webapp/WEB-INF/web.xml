@@ -19,13 +19,9 @@
   <servlet-mapping>
   	<servlet-name>DispatcherServlet</servlet-name>
   	<url-pattern>/</url-pattern>
+  	<url-pattern>/queue</url-pattern>
+  	<url-pattern>/test</url-pattern>
   </servlet-mapping>
-  
-  <servlet-mapping>
-  	<servlet-name>DispatcherServlet</servlet-name>
-  	<url-pattern>/playlist</url-pattern>
-  </servlet-mapping>
-  
   
   <listener>
   	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

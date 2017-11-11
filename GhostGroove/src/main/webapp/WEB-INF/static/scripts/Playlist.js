@@ -36,7 +36,7 @@
   
   function onPlayerReady(event) {
       event.target.playVideo();
-      //player.mute();
+      player.mute();
     };
   
   function onError(error){

@@ -12,8 +12,4 @@ public class LandingServlet {
 	public String getMain() {
 		return "forward:/static/index.html";
 	}
-	@RequestMapping(value="/queue",method=RequestMethod.GET)
-	public String getQue() {
-		return "forward:/static/views/GhostGroove.html";
-	}
 }

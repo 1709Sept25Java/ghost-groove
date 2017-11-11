@@ -27,8 +27,22 @@
 	<mvc:resources location="/WEB-INF/static/styles/" mapping="/styles/**"></mvc:resources>
 	<mvc:resources location="/WEB-INF/static/scripts/" mapping="/scripts/**"></mvc:resources>
 	
+	 <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" />
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/static/views/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+	
+	<mvc:annotation-driven />
+	
 	<!-- Pages Mappings -->
 	<mvc:view-controller path="/" view-name="landing"/>
 	<mvc:view-controller path="/queue" view-name="qview"/>
+	<mvc:view-controller path="/test" view-name="tview"/> 
 
 </beans>
