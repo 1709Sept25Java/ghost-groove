@@ -63,8 +63,12 @@
   
 	var finish = false;
 	function onPlayerStateChange(event) {
-	  if (event.data == YT.PlayerState.ENDED) {   
-		  loadvid('30Ef7i3qq-U', timeConvert(3,5), timeConvert(5,10),  "480");
+	  if (event.data == YT.PlayerState.ENDED) {  
+		  //after video ends, this plays on loop
+		  //loadvid('30Ef7i3qq-U', timeConvert(3,5), timeConvert(5,10),  "480");
+		  loadvid('30Ef7i3qq-U',0 , player.end,  "480");
+		  //player.cueVideoById();
+		  //player.playVideo(this.loadvid) startvideo
        }       
 	};
   
