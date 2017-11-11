@@ -10,7 +10,7 @@ public class LandingServlet {
 
 	@RequestMapping(value="/",method=RequestMethod.GET)
 	public String getMain() {
-		return "forward:/static/index.html";
+		return "forward:/static/views/index.html";
 	}
 	
 }
