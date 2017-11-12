@@ -33,6 +33,7 @@ public class UserController {
 	@RequestMapping(value="/create",method=RequestMethod.POST)
 	public String createUser(@Valid User user,BindingResult br,Model m) {
 		//ApplicationContext ac = new ClassPathXmlApplicationContext("dbBeans.xml");
+		user.setIsManager(false);
 		System.out.println(user);
 		if(uDao.addUser(user) != 0) {
 			return "redirect:/";
@@ -56,11 +57,30 @@ public class UserController {
 			session.setAttribute("uid", user.getId());
 			session.setAttribute("usename", user.getUsername());
 			session.setAttribute("admin", user.getIsManager());
+			if(user.getIsManager()) {
+				return "mgrHome";
+			}
 		} else {
 			return "redirect:/login";
 		}
 		
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/logout",method=RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/mgrhome",method=RequestMethod.GET)
+	public String mgrProfile(HttpSession session) {
+		Boolean mgr = (Boolean)session.getAttribute("admin");
+		if(mgr) {
+			return "mgrHome";
+		} else {
+			return "redirect:/";
+		}
 	}
 	
 }
