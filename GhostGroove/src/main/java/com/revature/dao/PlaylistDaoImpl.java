@@ -2,41 +2,107 @@ package com.revature.dao;
 
 import java.util.List;
 
-import com.revature.domain.Playlist;
+import javax.transaction.Transactional;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import com.revature.domain.Genre;
+import com.revature.domain.Playlist;
+import com.revature.domain.User;
+
+@Transactional
+@Component(value = "playlistDao")
+@Scope(value = "prototype")
 public class PlaylistDaoImpl implements PlaylistDao {
+
+	@Autowired
+	public SessionFactory sessionFactory;
 
 	@Override
 	public List<Playlist> getAllPlaylists() {
 
-		return null;
+		Session s = sessionFactory.getCurrentSession();
+
+		@SuppressWarnings("unchecked")
+		List<Playlist> playlists = s.createQuery("from Playlists").list();
+		for (Playlist playlist : playlists) {
+			System.out.println(playlist);
+		}
+		s.close();
+		return playlists;
 	}
 
 	@Override
-	public Playlist getPlaylistById(int playlistId) {
+	public Playlist getPlaylistByName(String name) {
 
-		return null;
+		Session s = sessionFactory.getCurrentSession();
+		Playlist playlist = (Playlist) s.get(Playlist.class, name);
+		s.close();
+
+		return playlist;
 	}
 
 	@Override
-	public int addPlaylist(Playlist playlist) {
+	public void addPlaylist(Playlist playlist) {
 
-		return 0;
-	}
-
-	@Override
-	public void updatePlaylist(Playlist updatePL) {
-
-	}
-
-	@Override
-	public void deletePlaylist(Playlist deletePL) {
+		Session s = sessionFactory.getCurrentSession();
+		Transaction tx = s.beginTransaction();
+		s.save(playlist);
+		tx.commit();
+		s.close();
 
 	}
 
 	@Override
-	public void sharePlaylist(Playlist sharePL) {
+	public void updatePlaylist(Playlist playlist) {
 
+		Session s = sessionFactory.getCurrentSession();
+		Transaction tx = s.beginTransaction();
+		s.merge(playlist);
+		tx.commit();
+		s.close();
+	}
+
+	@Override
+	public void deletePlaylist(Playlist playlist) {
+
+		Session s = sessionFactory.getCurrentSession();
+		Transaction tx = s.beginTransaction();
+		s.delete(playlist);
+		tx.commit();
+		s.close();
+	}
+
+	@Override
+	public void sharePlaylist(Playlist playlist) {
+
+	}
+
+	@Override
+	public Playlist getPlaylistByGenre(Genre genre) {
+
+		Session s = sessionFactory.getCurrentSession();
+		Playlist playlist = (Playlist) s.get(Playlist.class, genre);
+		s.close();
+
+		return playlist;
+
+	}
+
+	@Override
+	public List<Playlist> getPlaylistsByUserId(User user) {
+		Session s = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List <Playlist> playlists = (List<Playlist>) s.get(Playlist.class, user.getId());
+		s.close();
+
+		return playlists;
+		
 	}
 
 }

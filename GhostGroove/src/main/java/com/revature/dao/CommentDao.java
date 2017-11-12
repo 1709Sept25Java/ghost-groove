@@ -3,17 +3,18 @@ package com.revature.dao;
 import java.util.List;
 
 import com.revature.domain.Comment;
+import com.revature.domain.Playlist;
 
 public interface CommentDao {
 
 	public List<Comment> getAllComments();
 
-	public Comment getCommenteById(int id);
+	public Comment getCommenteByPlaylist(Playlist playlist);
 
-	public int addComment(Comment comment);
+	public Comment addComment(Comment comment);
 
-	public void updateComment(Comment updateCom);
+	public void updateComment(Comment comment);
 
-	public void deleteComment(Comment deleteCom);
+	public void deleteComment(Comment comment);
 
 }

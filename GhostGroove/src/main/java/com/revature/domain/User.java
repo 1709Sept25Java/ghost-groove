@@ -1,5 +1,6 @@
 package com.revature.domain;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -7,7 +8,10 @@ import javax.validation.constraints.NotNull;
 
 @Entity 
 @Table(name="USERS")
-public class User {
+public class User implements Serializable{
+
+
+	private static final long serialVersionUID = 1L;
 
 	public User() {
 		super();
@@ -38,7 +42,7 @@ public class User {
 	
 	@Column(name="U_ISMANAGER")
 	@NotNull
-	private String isManager;
+	private boolean isManager;
 	
 	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinTable(name="USER_PLAYLIST",joinColumns= {@JoinColumn(name="U_ID")},inverseJoinColumns= {@JoinColumn(name="P_ID")})
@@ -88,10 +92,10 @@ public class User {
 	public void setEmail(String email) {
 		Email = email;
 	}
-	public String getIsManager() {
+	public boolean getIsManager() {
 		return isManager;
 	}
-	public void setIsManager(String isManager) {
+	public void setIsManager(boolean isManager) {
 		this.isManager = isManager;
 	}
 

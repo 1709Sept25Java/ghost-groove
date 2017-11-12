@@ -8,12 +8,12 @@ public interface GenreDao {
 
 	public List<Genre> getAllGenres();
 
-	public Genre getGenreById(int id);
+	public Genre getGenreByName(String g_name);
 
-	public int addGenre(Genre genre);
+	public Genre addGenre(Genre genre);
 
-	public void updateGenre(Genre updateGen);
+	public void updateGenre(Genre genre);
 
-	public void deleteGenre(Genre deleteGen);
+	public void deleteGenre(Genre genre);
 
 }

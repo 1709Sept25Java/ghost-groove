@@ -1,5 +1,6 @@
 package com.revature.domain;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -8,8 +9,12 @@ import javax.validation.constraints.NotNull;
 
 @Entity 
 @Table(name="PLAYLIST")
-public class Playlist {
+public class Playlist implements Serializable {
 	
+
+	private static final long serialVersionUID = 1L;
+
+
 	public Playlist() {
 		super();
 	}

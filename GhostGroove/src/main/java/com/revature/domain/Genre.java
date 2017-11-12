@@ -1,15 +1,20 @@
 package com.revature.domain;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+
 @Entity 
 @Table(name="GENRE")
-public class Genre {
+public class Genre implements Serializable {
 	
+
+	private static final long serialVersionUID = 1L;
+
 	public Genre() {
 		super();
 	}

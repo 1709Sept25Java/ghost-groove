@@ -2,22 +2,23 @@ package com.revature.dao;
 
 import java.util.List;
 
+import com.revature.domain.Genre;
 import com.revature.domain.Song;
 
 public interface SongDao {
 
 	public List<Song> getAllSongs();
 
-	public Song getSongById(int songId);
+	public Song getSongById(int id);
 
-	public Song getSongByGenreId(int genreId);
+	public Song getSongByGenreName(Genre genre);
 
 	public Song getSongByYoutubeId(int youtubeId);
 
-	public int addSong(Song song);
+	public Song addSong(Song song);
 
-	public void updateSong(Song updateSong);
+	public void updateSong(Song song);
 
-	public void deleteSong(Song deleteSong);
+	public void deleteSong(Song song);
 
 }
