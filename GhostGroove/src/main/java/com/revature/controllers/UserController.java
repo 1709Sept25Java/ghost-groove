@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.revature.dao.UserDao;
+import com.revature.domain.Playlist;
 import com.revature.domain.User;
 import com.revature.model.Login;
 
@@ -64,7 +65,7 @@ public class UserController {
 				return "redirect:/mgrhome";
 			}
 			else {
-				return "redirect:/home";
+				return "redirect:/user/home";
 			}
 		} else {
 			return "redirect:/login";

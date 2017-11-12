@@ -35,8 +35,13 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User getUserById(int uId) {
-
-		return null;
+		Session s = sessionFactory.getCurrentSession();
+		Transaction tx = s.beginTransaction();
+		Query q = s.createQuery("from User where id=:idVar");
+		q.setInteger("idVar", uId);
+		User user = (User)q.uniqueResult();
+		tx.commit();
+		return user;
 	}
 
 	@Override

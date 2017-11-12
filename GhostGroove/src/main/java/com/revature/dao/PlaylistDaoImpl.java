@@ -1,6 +1,7 @@
 package com.revature.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import com.revature.domain.Playlist;
+import com.revature.domain.User;
 
 @Repository(value="playlistDao")
 @Scope(value="session")
@@ -33,8 +35,16 @@ public class PlaylistDaoImpl implements PlaylistDao {
 
 	@Override
 	public int addPlaylist(Playlist playlist) {
-
-		return 0;
+		Session s = sessionFactory.getCurrentSession();
+		Transaction tx = s.beginTransaction();
+		s.saveOrUpdate(playlist);
+		Set<User> users = playlist.getOwners();
+		for(User u : users) {
+			u.getPlaylists().add(playlist);
+			s.saveOrUpdate(u);
+		}
+		tx.commit();
+		return playlist.getId();
 	}
 
 	@Override

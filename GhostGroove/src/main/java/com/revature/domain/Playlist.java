@@ -91,4 +91,9 @@ public class Playlist implements Serializable{
 	public void setGenreId(Genre genre) {
 		this.genre = genre;
 	}
+
+	@Override
+	public String toString() {
+		return "Playlist [id=" + id + ", name=" + name + ", genre=" + genre + ", owners=" + owners + "]";
+	}
 }
