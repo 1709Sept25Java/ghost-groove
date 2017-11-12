@@ -61,13 +61,14 @@ public class UserController {
 			session.setAttribute("usename", user.getUsername());
 			session.setAttribute("admin", user.getIsManager());
 			if(user.getIsManager()) {
-				return "mgrHome";
+				return "redirect:/mgrhome";
+			}
+			else {
+				return "redirect:/home";
 			}
 		} else {
 			return "redirect:/login";
 		}
-		
-		return "redirect:/";
 	}
 	
 	@RequestMapping(value="/logout",method=RequestMethod.GET)
@@ -84,6 +85,16 @@ public class UserController {
 		} else {
 			return "redirect:/";
 		} 
+	}
+	
+	@RequestMapping(value="/home",method=RequestMethod.GET)
+	public String profile(HttpSession session) {
+		Integer id = (Integer)session.getAttribute("uid");
+		if(id != null) {
+			return "home";
+		} else {
+			return "redirect:/";
+		}
 	}
 	
 	@RequestMapping(value="/allUsers",method=RequestMethod.GET)

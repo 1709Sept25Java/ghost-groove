@@ -35,7 +35,7 @@ public class Playlist implements Serializable{
 	@OneToMany(mappedBy="playlist",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private List<Comment> comments;
 	
-	@ManyToMany(mappedBy="playlists",fetch=FetchType.LAZY)
+	@ManyToMany(mappedBy="playlists",fetch=FetchType.EAGER)
 	private Set<User> owners;
 	
 	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)

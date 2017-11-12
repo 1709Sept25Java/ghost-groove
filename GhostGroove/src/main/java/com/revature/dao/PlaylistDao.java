@@ -17,5 +17,7 @@ public interface PlaylistDao {
 	public void deletePlaylist(Playlist deletePL);
 
 	public void sharePlaylist(Playlist sharePL);
+	
+	public List<Playlist> playlistsByUser(int uId);
 
 }
