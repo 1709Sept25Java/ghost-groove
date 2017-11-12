@@ -58,7 +58,7 @@ public class User implements Serializable{
 	@NotNull
 	private boolean isManager;
 	
-	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@ManyToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	@JoinTable(name="USER_PLAYLIST",joinColumns= {@JoinColumn(name="U_ID")},inverseJoinColumns= {@JoinColumn(name="P_ID")})
 	private Set<Playlist> playlists;
 	

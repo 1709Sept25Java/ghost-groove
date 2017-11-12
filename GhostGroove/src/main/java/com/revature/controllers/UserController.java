@@ -1,5 +1,7 @@
 package com.revature.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.revature.dao.UserDao;
 import com.revature.domain.User;
@@ -81,6 +84,28 @@ public class UserController {
 		} else {
 			return "redirect:/";
 		} 
+	}
+	
+	@RequestMapping(value="/allUsers",method=RequestMethod.GET)
+	@ResponseBody
+	public List<User> allUsersJson(HttpSession session){
+		Boolean mgr = (Boolean)session.getAttribute("admin");
+		if(mgr) {
+			List<User> users = uDao.getAllUsers();
+			return users;
+		} else {
+			return null;
+		}
+	}
+	
+	@RequestMapping(value="/viewUsers",method=RequestMethod.GET)
+	public String viewUsers(HttpSession session) {
+		Boolean mgr = (Boolean)session.getAttribute("admin");
+		if(mgr) {
+			return "viewUsers";
+		} else {
+			return "redirect:/";
+		}
 	}
 	
 }

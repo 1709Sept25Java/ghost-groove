@@ -18,6 +18,9 @@
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header"><a class="navbar-brand" href="/GhostGroove">Ghost Groove</a></div>
+			<ul class="nav navbar-nav">
+				<li><a href="/GhostGroove/user/mgrhome">Home</a></li>
+			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="/GhostGroove/user/logout"><span class="glyphicon glyphicon-logout"></span>Logout</a></li>
 			</ul>

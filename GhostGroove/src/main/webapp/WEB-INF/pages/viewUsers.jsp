@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html ng-app="mgrApp">
+<html ng-app="allUsersApp">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Ghost: Mgr Home</title>
+<title>Ghost: View Users</title>
 
 <!-- Angular and Bootstrap-->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
@@ -18,7 +18,7 @@
 		<div class="container-fluid">
 			<div class="navbar-header"><a class="navbar-brand" href="/GhostGroove">Ghost Groove</a></div>
 			<ul class="nav navbar-nav">
-				<li><a href="/GhostGroove/user/viewUsers">View Users</a></li>
+				<li><a href="/GhostGroove/user/mgrhome">Home</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="/GhostGroove/user/logout"><span class="glyphicon glyphicon-logout"></span>Logout</a></li>
@@ -27,18 +27,27 @@
 	</nav>
 	
 	<div class="container">
-		<center><h1>Manager Home</h1></center>
-		<a class="btn btn-primary col-sm-offset-11" href="/GhostGroove/genre/new">Add Genre</a>
-		<table class="table table-striped">
-			<thead><tr><th>Genre</th></tr></thead>
-			<tbody ng-controller="genreCtrl" id="genreTable">
-				<tr ng-repeat="x in genres">
-					<td>{{x.name}}</td>
+		<center><h1>Users</h1></center>
+		<table class="table table-striped" ng-controller="usersCtrl">
+			<thead>
+				<tr>
+					<td>Username</td>
+					<td>Name</td>
+					<td>Email</td>
+					<td>Manager</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="x in users">
+					<td>{{x.username}}</td>
+					<td>{{x.firstname}} {{x.Lastname}}</td>
+					<td>{{x.email}}</td>
+					<td>{{x.isManager}}</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 	
 </body>
-<script src="../static/script/mgrHome.js"></script>
+<script src="../static/script/viewUsers.js"></script>
 </html>
