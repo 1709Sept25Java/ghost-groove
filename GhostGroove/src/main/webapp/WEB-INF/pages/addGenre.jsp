@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html ng-app="mgrApp">
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Ghost: Mgr Home</title>
+<title>Ghost: New Genre</title>
 
 <!-- Angular and Bootstrap-->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
@@ -24,18 +25,25 @@
 	</nav>
 	
 	<div class="container">
-		<center><h1>Manager Home</h1></center>
-		<a class="btn btn-primary col-sm-offset-11" href="/GhostGroove/genre/new">Add Genre</a>
-		<table class="table table-striped">
-			<thead><tr><th>Genre</th></tr></thead>
-			<tbody ng-controller="genreCtrl" id="genreTable">
-				<tr ng-repeat="x in genres">
-					<td>{{x.name}}</td>
-				</tr>
-			</tbody>
-		</table>
+		<form:form class="horizontal-form" modelAttribute="genre" method="post" action="new">
+			<div class="form-group">
+    			<form:label path="name" class="control-label col-sm-2" for="name">Name:</form:label>
+    			<div class="col-sm-10">
+    	  			<form:input type="text" path="name" class="form-control" name="name" placeholder="name"/>
+    			</div>
+  			</div>
+  			<br><br>
+  			<div class="form-group">
+				<form:label for="desc" path="description">Description:</form:label>
+				<form:textarea class="form-control" rows="5" path="description"></form:textarea>
+			</div>
+			<div class="form-group"> 
+    			<div class="col-sm-offset-11 col-sm-10">
+    	  			<form:button name="submit" class="btn btn-primary">Submit</form:button>
+    			</div>
+  			</div>
+		</form:form>
 	</div>
 	
 </body>
-<script src="../static/script/mgrHome.js"></script>
 </html>
