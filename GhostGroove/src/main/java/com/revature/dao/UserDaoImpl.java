@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.domain.User;
 
-@Transactional
 @Repository(value="userDao")
 @Scope(value="session")
 public class UserDaoImpl implements UserDao {
@@ -43,12 +42,13 @@ public class UserDaoImpl implements UserDao {
 		return null;
 	}
 
-	@Transactional
 	@Override
 	public int addUser(User user) {
 		Session s = sessionFactory.getCurrentSession();
+		Transaction tx = s.beginTransaction();
 		int result = 0;
 		s.saveOrUpdate(user);
+		tx.commit();
 		return user.getId();
 	}
 
@@ -66,11 +66,13 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User login(String username, String password) {
 		Session s = sessionFactory.getCurrentSession();
+		Transaction tx = s.beginTransaction();
 		Query q = s.getNamedQuery("login");
 		q.setString("unameVar", username);
 		q.setString("pwVar", password);
 		User u = (User) q.uniqueResult();
-		return null;
+		tx.commit();
+		return u;
 	}
 	
 }

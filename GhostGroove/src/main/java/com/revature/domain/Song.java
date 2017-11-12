@@ -29,7 +29,7 @@ public class Song implements Serializable{
 	
 	@Column(name="S_YOUTUBE_ID")
 	@NotNull
-	private int youtubeId;
+	private String youtubeId;
 	
 	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	@JoinColumn(name="S_GENRE")
@@ -71,11 +71,11 @@ public class Song implements Serializable{
 		this.url = url;
 	}
 
-	public int getYoutubeId() {
+	public String getYoutubeId() {
 		return youtubeId;
 	}
 
-	public void setYoutubeId(int youtubeId) {
+	public void setYoutubeId(String youtubeId) {
 		this.youtubeId = youtubeId;
 	}
 

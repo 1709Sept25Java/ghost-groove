@@ -1,18 +1,14 @@
 package com.revature.controllers;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -53,11 +49,15 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public String validateLogin(@Valid Login login,Model m) {
+	public String validateLogin(@Valid Login login,Model m,HttpSession session) {
 		
 		User user = uDao.login(login.getUsername(), login.getPassword());
 		if(user != null) {
-			
+			session.setAttribute("uid", user.getId());
+			session.setAttribute("usename", user.getUsername());
+			session.setAttribute("admin", user.getIsManager());
+		} else {
+			return "redirect:/login";
 		}
 		
 		return "redirect:/";

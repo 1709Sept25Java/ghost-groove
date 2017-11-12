@@ -25,7 +25,7 @@
 	</nav>
 	
 	<div class="container">
-		<form:form class="horizontal-form" action="login" modelAttribute="user" method="post">
+		<form:form class="horizontal-form" action="login" modelAttribute="login" method="post">
 			<div class="form-group">
     			<form:label path="Username" class="control-label col-sm-2" for="username">Username:</form:label>
     			<div class="col-sm-10">
