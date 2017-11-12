@@ -80,7 +80,7 @@ public class UserController {
 			return "mgrHome";
 		} else {
 			return "redirect:/";
-		}
+		} 
 	}
 	
 }
