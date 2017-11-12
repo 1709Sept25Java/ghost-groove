@@ -170,11 +170,11 @@ app.service('VideosService', ['$window', '$rootScope', '$log', function ($window
     return results;
   };
 
-  this.getUpcoming = function () {
+  this.getNextPlaylist = function () {
     return nextPlaylist;
   };
 
-  this.getHistory = function () {
+  this.getPrevious = function () {
     return previous;
   };
 
