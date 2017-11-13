@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity 
 @Table(name="PLAYLIST")
 
@@ -36,17 +38,19 @@ public class Playlist implements Serializable{
 	@Column(name="P_DESCRIPTION")
 	private String description;
 	
-	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="P_GENRE")
 	private Genre genre;
 	
 	@OneToMany(mappedBy="playlist",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private List<Comment> comments;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy="playlists",fetch=FetchType.EAGER)
 	private Set<User> owners;
 	
-	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JsonIgnore
+	@ManyToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	@JoinTable(name="PLAYLIST_SONG",joinColumns= {@JoinColumn(name="P_ID")},inverseJoinColumns= {@JoinColumn(name="S_ID")})
 	private Set<Song> songs;
 	
