@@ -1,6 +1,12 @@
 @charset "ISO-8859-1";
 
+#share{
+float: right;
+right: 0px;
+bottom: 0px;
+text-align: center;
 
+}
 #ghost {
 	float: right;
 	border: 0;

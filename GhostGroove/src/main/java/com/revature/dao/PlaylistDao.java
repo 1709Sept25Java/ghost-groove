@@ -22,6 +22,6 @@ public interface PlaylistDao {
 
 	public void deletePlaylist(Playlist playlist);
 
-	public void sharePlaylist(Playlist playlist);
+	public void sharePlaylist(Playlist playlist, User user);
 
 }

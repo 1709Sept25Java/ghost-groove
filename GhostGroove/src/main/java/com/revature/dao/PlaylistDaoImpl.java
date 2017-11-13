@@ -1,8 +1,9 @@
 package com.revature.dao;
 
 import java.util.List;
+import java.util.Set;
 
-import javax.transaction.Transactional;
+
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,6 +11,7 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.domain.Genre;
 import com.revature.domain.Playlist;
@@ -78,8 +80,16 @@ public class PlaylistDaoImpl implements PlaylistDao {
 		s.close();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public void sharePlaylist(Playlist playlist) {
+	public void sharePlaylist(Playlist playlist, User user) {
+		Session s = sessionFactory.getCurrentSession();
+		Transaction tx = s.beginTransaction();
+		List<Playlist> playlists = (List<Playlist>) user.getPlaylists();
+		playlists.add(playlist);
+		s.save(playlists);
+		tx.commit();
+		s.close();
 
 	}
 
@@ -98,11 +108,11 @@ public class PlaylistDaoImpl implements PlaylistDao {
 	public List<Playlist> getPlaylistsByUserId(User user) {
 		Session s = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		List <Playlist> playlists = (List<Playlist>) s.get(Playlist.class, user.getId());
+		List<Playlist> playlists = (List<Playlist>) s.get(Playlist.class, user.getId());
 		s.close();
 
 		return playlists;
-		
+
 	}
 
 }

@@ -7,7 +7,10 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
 	<!-- Enable @Transactional -->
-	<tx:annotation-driven/>
+	<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+	
+	<!-- Search for Beans -->
+	<context:component-scan base-package="com.revature"></context:component-scan>
 	
 	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
@@ -23,7 +26,9 @@
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.current_session_context_class">thread</prop>
 			</props>
 		</property>
 	</bean>
