@@ -3,11 +3,11 @@ package com.revature.dao;
 import java.util.List;
 import java.util.Set;
 
-<<<<<<< HEAD
 
-=======
+
+
 import org.hibernate.Criteria;
->>>>>>> origin/MangerHome
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
