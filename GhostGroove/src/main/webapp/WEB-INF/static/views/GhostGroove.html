@@ -11,11 +11,20 @@
 <body>
 <h1>Ghost Groove</h1>
 <br>
-<div id="ytplayer" name="ytplayer"></div>
+<!--  
+<div id="ytplayer" name="ytplayer"></div> -->
 
+<!-- Fill comment with comments from database, joined by playlistid 
 <div id="commentTitle" name="commentTitle">Comments</div>
-<!-- Fill comment with comments from database, joined by playlistid -->
-<div id="commentBox" name="commentBox"></div>
+<div id="commentBox" name="commentBox"></div>-->
+
+	<form method="GET">
+	<div id="selectedId" name="selectedId">Select a video below...</div>
+	<div id="selectedTitle" name="selectedTitle"></div>
+	<input type="button" value="Select Video">
+</form>
+
+<div></div>
 
 <!-- Gets searchView -->
     <body ng-app="instantYoutubeSearch" ng-controller="youtubeController">

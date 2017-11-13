@@ -16,7 +16,7 @@ app.controller('youtubeController', function($scope,$http,$filter) {
             }
         }).then(function (data) {
             console.log(data.data);
-            console.log(data.data.items);
+            console.log(data.data.items[0].id.videoId);
             if (data.data.items.length === 0) {
                 $scope.youtubeData = 'No results were found!';
             }

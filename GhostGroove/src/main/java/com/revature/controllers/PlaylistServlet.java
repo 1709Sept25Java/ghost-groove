@@ -1,10 +1,19 @@
 package com.revature.controllers;
 
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.revature.domain.Song;
 
 @Controller
 @RequestMapping("/")
@@ -14,10 +23,24 @@ public class PlaylistServlet {
 	public String getQue() {
 		return "forward:/static/views/GhostGroove.html";
 	}
-	@RequestMapping("/queue")
-	public ModelAndView changeQ() {
-		String test="test msg"; //last arg
-		//"jsp name" "name in jsp... ${test}"
-		return new ModelAndView("testjsp","test",test);
+	public @ResponseBody Song getSongsInJSON(@RequestParam String videoid, String title) {
+
+		Song song = new Song();
+		song.setYoutubeId(videoid);
+		song.setTitle(title);
+		System.out.println("Info: "+videoid+" "+title+" "+song);
+		return song;
+
 	}
+	public void handlePost(@RequestParam String selectedId, String selectedTitle, Model m) {
+        if(!selectedId.equals(null)&!selectedTitle.equals(null)){
+            //handle 
+            m.addAttribute("youtubeId", selectedId);
+            m.addAttribute("title", selectedTitle);
+         }
+	}
+	public void validSong(@Valid Song song, Model m, HttpSession sess) {
+		sess.setAttribute("youtubeId", song.getYoutubeId());
+		sess.setAttribute("title", song.getTitle());
+	} 
 }

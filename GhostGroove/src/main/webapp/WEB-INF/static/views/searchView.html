@@ -12,11 +12,14 @@
             <div class="media-body">
                 <a target="_block" href="https://www.youtube.com/watch?v={{data.id.videoId}}">
                 {{data.snippet.title}}</a>
-                <p>By <a target="_block" 
+                <br>By <a target="_block" 
                 href="https://www.youtube.com/channel/{{data.snippet.channelId}}">
-                <span class="label label-info">{{data.snippet.channelTitle}}</span>
-                </a></p>
-                <div>Video id: {{data.id.videoId}}</div><p></p>
+                <span class="label label-info">{{data.snippet.channelTitle}}</span></a>
+                <form method="post">
+                <br>Select Video: <div type="button" class="videoid" 
+                id="{{data.snippet.title}}" onclick="getVideoTitle(this.id)" style="color:orange">
+                {{data.id.videoId}}</div><p></p>
+            	</form>
             </div>
         </div>
        </div>

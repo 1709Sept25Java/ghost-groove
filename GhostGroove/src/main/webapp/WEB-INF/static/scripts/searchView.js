@@ -7,3 +7,14 @@ app.config(function($stateProvider,$urlRouterProvider){
         templateUrl:"/GhostGroove/views/searchView.html"
     });
 });
+
+var videotitle; var videoid;
+function getVideoTitle(vid){
+	videotitle=vid;
+	videoid=document.getElementById(vid).innerHTML;
+	console.log("Videoid: " + videoid);
+	console.log("Title: " + videotitle);
+	
+	document.getElementById("selectedId").innerHTML="Video Id: "+videoid;
+	document.getElementById("selectedTitle").innerHTML="Video Title: "+videotitle;
+};
