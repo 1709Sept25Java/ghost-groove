@@ -4,65 +4,76 @@
 <meta charset="ISO-8859-1">
 <title>Edit Playlist</title>
 
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script> 
-    <script src="bower_components/js/angular-local-storage.min.js"></script> 
+<script
+	src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+<script src="bower_components/js/angular-local-storage.min.js"></script>
 
-<link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Montserrat'
+	rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="CSS/style2.css">
 
-    
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body data-ng-controller="VideosController">
-    <header>
-      <h1>Ghost<strong>Groove</strong></h1>
-      <form id="search" data-ng-submit="search()">
-        <input id="query" name="q" type="text" placeholder="Search for a YouTube music video" data-ng-model="query">
-        <input id="submit" type="image" src="search.png" alt="Search">
-      </form>
-      
+	<header>
+		<h1>
+			Ghost<strong>Groove</strong>
+		</h1>
+		<form id="search" data-ng-submit="search()">
+			<input id="query" name="q" type="text"
+				placeholder="Search for a YouTube music video" data-ng-model="query">
+			<input id="submit" type="image" src="search.png" alt="Search">
+		</form>
+
 		<div>
-        <nav>
-		<ul>
-        <li class="active"><a href="editPlaylist.html">Edit Playlist</a></li>
-		<li><a href="playlist.html">Playlist</a></li>
-        <li><a href="genre.html">Genre</a></li>
-      
-		</ul>
-		</nav>
+			<nav>
+				<ul>
+					<li class="active"><a href="editPlaylist.html">Edit
+							Playlist</a></li>
+					<li><a href="playlist.html">Playlist</a></li>
+					<li><a href="genre.html">Genre</a></li>
+
+				</ul>
+			</nav>
 		</div>
-		
-      </header>
-       <div id="ghost">
-    <!-- via GIPHY -->
-    <iframe src="https://giphy.com/embed/3HeOPCOyyyhmo" width="500" height="700" frameBorder="0" class="giphy-embed"></iframe><p>
-    <a href="https://giphy.com/gifs/actually-me-3HeOPCOyyyhmo"></a></p>
+
+	</header>
+	<div id="ghost">
+		<!-- via GIPHY -->
+		<iframe src="https://giphy.com/embed/3HeOPCOyyyhmo" width="500"
+			height="700" frameBorder="0" class="giphy-embed"></iframe>
+		<p>
+			<a href="https://giphy.com/gifs/actually-me-3HeOPCOyyyhmo"></a>
+		</p>
 	</div>
-      
-       <div id="results">
-      <div class="video" data-ng-repeat="video in results" data-ng-click="queue(video.id, video.title)">
-        <img class="video-image" data-ng-src="{{ video.thumbnail }}">
-        <p class="video-title">{{ video.title }}</p>
-        <p class="video-author">{{ video.author }}</p>
-        <p class="video-description">{{ video.description }}</p>
-      </div>
-    </div>
-     
-     <form method="post" action="http://localhost:8082/GhostGroove/playlist/sharePlaylist">
-     <div id="share">
-     	 <strong>Share your Playlist</strong>
-	     <input type="text" name="username" placeholder="enter the username" required/>
-	     <input type="text" name="playlistName" placeholder="enter title of the playlist" required/>
-	     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-	     <strong>Share</strong>
-	     <input type="submit" id="share"/>
-	     
-	     </div>
-	     
-     </form>
-   
-   
+
+	<div id="results">
+		<div class="video" data-ng-repeat="video in results"
+			data-ng-click="queue(video.id, video.title)">
+			<img class="video-image" data-ng-src="{{ video.thumbnail }}">
+			<p class="video-title">{{ video.title }}</p>
+			<p class="video-author">{{ video.author }}</p>
+			<p class="video-description">{{ video.description }}</p>
+		</div>
+	</div>
+
+	<div id="share" ng-controller="shareController">
+		<form method="post" ng-submit="sharePlaylist()">
+
+		<strong>Share your Playlist</strong> <input ng-model="username"
+			type="text" name="username" placeholder="enter the username" required />
+		<input ng-model="playlistName" type="text" name="playlistName"
+			placeholder="enter title of the playlist" required /> <strong>Share</strong>
+		
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		<input type="submit" id="share"/>
+		</form>
+	</div>
+	
+
+
 </body>
 <script type="text/javascript" src="htmlScript/videosController.js"></script>
 <script type="text/javascript" src="htmlScript/edit.js"></script>

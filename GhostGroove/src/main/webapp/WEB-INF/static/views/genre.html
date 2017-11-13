@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app="GhostApp">
+<head>
+<meta charset="ISO-8859-1">
+<title>Comments</title>
+
+<meta charset="UTF-8">
+
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet">
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+<link rel="stylesheet" type="text/css" href="CSS/style2.css">
+</head>
+<body>
+	<header>
+		<center>
+			<strong>Please Leave a Comment</strong>
+		</center>
+		<form>
+			<nav class="navbar">
+				<a href="editPlaylist.html">Edit Playlist</a> <a
+					href="playlist.html">Playlist</a> <a href="views/genre.html">Genre</a>
+				<a href="/GhostGroove/user/mgrhome">Home</a> <a href="/GhostGroove">Ghost
+					Groove</a> <a href="/GhostGroove/user/logout">Logout</a>
+
+			</nav>
+		</form>
+
+	</header>
+	<div class="container">
+
+		<br />
+		<div class="form-group">
+			<h2>Leave a Replay</h2>
+			<form ng-controller="CommnetController">
+				<textarea class="form-control" rows="5" ng-model="comment"
+					placeholder="Write Your Comment Here"></textarea>
+				<br />
+				<button class="btn btn-success btn-md pull-right"
+					ng-click='commentPost()'>Comment</button>
+				<br /> <br />
+				<h3>Comments</h3>
+				<ul class="list-group">
+					<li class="list-group-item" ng-repeat="c in comments">{{ c }}
+						<a href="" ng-click="postComment($home)"><span
+							class="glyphicon glyphicon-trash"
+							style="color: red; float: right;"></span></a>
+					</li>
+				</ul>
+			</form>
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript" src="htmlScript/genre.js"></script>
+</html>

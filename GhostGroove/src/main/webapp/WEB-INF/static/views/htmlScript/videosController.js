@@ -31,8 +31,7 @@ app.service('VideosService', ['$window', '$rootScope', '$log', function ($window
   };
   var results = [];
   
-     
-  var nextPlaylist = [
+      var nextPlaylist = [
     {id: 'kRJuY6ZDLPo', title: 'La Roux - In for the Kill (Twelves Remix)'},
     {id: '45YSGFctLws', title: 'Shout Out Louds - Illusions'},
     {id: 'ktoaj1IpTbw', title: 'CHVRCHES - Gun'},
@@ -45,20 +44,27 @@ app.service('VideosService', ['$window', '$rootScope', '$log', function ($window
     {id: 'XKa7Ywiv734', title: '[OFFICIAL HD] Daft Punk - Give Life Back To Music (feat. Nile Rodgers)'}
   ];
   
-  //Here is http get request, not sure if I am doing it right
-  function studentController($scope,$http) {
-	  
-	  var url = "http://localhost:8082/GhostGroove/playlist/allPlaylists";
-      $http.get(url).then( function(response) {
+  /*var dataSongs = function ($http, $scope){
+      var url = "http://localhost:8082/GhostGroove/song/all"
+  $http.get(url).then( function(response) {
          $scope.nextPlaylist = response.data;
-         $log.info("You data is ready");
+         console.log($scope.nextPlaylist);
       })};
-      //hoping to return the json data and id and title to nextPlaylist
       
+      this.dataSongs= function (data) {
+    nextPlaylist.length = 0;
+    for (var i = 0; i< data.length; i++) {
+      dataSongs.push({
+        id: data[i].id.videoId,
+        title: data[i].snippet.title,
+      });
+    }
+    return nextPlaylist;
+  }*/
       
    
   $window.onYouTubeIframeAPIReady = function () {
-    $log.info('Youtube is ready');
+	  console.log('Youtube is ready');
     youtube.ready = true;
     service.bindPlayer('placeholder');
     service.loadPlayer();
@@ -66,7 +72,7 @@ app.service('VideosService', ['$window', '$rootScope', '$log', function ($window
   };
 
   function onYoutubeReady (event) {
-    $log.info('YouTube Player is ready');
+	  console.log('YouTube Player is ready');
     youtube.player.cueVideoById(previous[0].id);
     youtube.videoId = previous[0].id;
     youtube.videoTitle = previous[0].title;
@@ -87,12 +93,12 @@ app.service('VideosService', ['$window', '$rootScope', '$log', function ($window
   }
 
   this.bindPlayer = function (elementId) {
-    $log.info('Binding to ' + elementId);
+	  console.log('Binding to ' + elementId);
     youtube.playerId = elementId;
   };
 
   this.createPlayer = function () {
-    $log.info('Creating a new Youtube player for DOM id ' + youtube.playerId + ' and video ' + youtube.videoId);
+	  console.log('Creating a new Youtube player ' + youtube.playerId + ' and video ' + youtube.videoId);
     return new YT.Player(youtube.playerId, {
       height: youtube.playerHeight,
       width: youtube.playerWidth,
@@ -211,6 +217,7 @@ app.controller('VideosController', function ($scope, $http, $log, VideosService)
       VideosService.deleteVideo(list, id);
     };
 
+   
     $scope.search = function () {
       $http.get('https://www.googleapis.com/youtube/v3/search', {
         params: {
@@ -224,10 +231,10 @@ app.controller('VideosController', function ($scope, $http, $log, VideosService)
       })
       .success( function (data) {
         VideosService.listResults(data);
-        $log.info(data);
+        console.log(data);
       })
       .error( function () {
-        $log.info('Search error');
+    	  console.log('Search error');
       });
     }
 
@@ -236,7 +243,7 @@ app.controller('VideosController', function ($scope, $http, $log, VideosService)
     }
 });
 
-/*Source:
+/*Citation:
  * Tutorial: "Make a YouTube app with AngularJS and Onsen UI"
  * Author:Fran Dios
  * Website: https://medium.com/the-web-tub/make-a-youtube-app-with-angularjs-and-onsen-ui-c836e7e046e0
