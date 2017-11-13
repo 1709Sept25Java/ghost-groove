@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/GhostGroove/static/views/CSS/styleJsp.css"/>
 </head>
 <body>
 	
@@ -21,7 +22,7 @@
 				<li class="dropdown" ng-controller="genreCtrl">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">Genres<span class="caret"></span></a>
 						<ul class="dropdown-menu" >
-							<li ng-repeat="g in genres"><a href="/GhostGroove/genre/{{g.id}}">{{g.name}}</a></li>
+							<li ng-repeat="g in genres"><a href="../genre/{{g.id}}">{{g.name}}</a></li>
 						</ul>
 				</li>
 			</ul>
@@ -42,7 +43,7 @@
 			<div class="form-group" ng-controller="genreCtrl">
 				<label name="genre">Genre</label>
 				<select ng-model="playlist.genre" name="genre" class="selectpicker">
-					<option ng-repeat="g in genres" value="{{g}}">{{g.name}}</option>
+					<option ng-repeat="g in genres" value="{{g.id}}">{{g.name}}</option>
 				</select>
 			</div>
 			<button class="btn btn-primary">Submit</button>

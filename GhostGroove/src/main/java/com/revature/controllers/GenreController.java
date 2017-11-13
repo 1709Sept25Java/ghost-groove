@@ -51,4 +51,14 @@ public class GenreController {
 		}
 	}
 	
+	@RequestMapping(value="/view",method=RequestMethod.GET)
+	public String viewGenre(HttpSession session) {
+		Integer uid  = (Integer) session.getAttribute("uid");
+		if(uid != null) {
+			return "forward:/static/views/genre.html";
+		} else {
+			return "redirect:/";
+		}
+	}
+	
 }
