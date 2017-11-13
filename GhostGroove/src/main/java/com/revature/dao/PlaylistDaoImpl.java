@@ -3,6 +3,7 @@ package com.revature.dao;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -68,7 +69,7 @@ public class PlaylistDaoImpl implements PlaylistDao {
 		Transaction tx = s.beginTransaction();
 		Query q = s.createQuery("select p from Playlist p join p.owners o where o.id=:idVar");
 		q.setInteger("idVar", uId);
-		List<Playlist> playlists = q.list();
+		List<Playlist> playlists = q.setMaxResults(20).list();
 		tx.commit();
 		return playlists;
 	}
