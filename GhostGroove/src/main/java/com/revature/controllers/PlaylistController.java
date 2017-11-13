@@ -58,6 +58,16 @@ public class PlaylistController {
 		}
 		return "redirect:/static/views/editPlaylist.html";
 	}
+	
+	@RequestMapping(value="/view",method=RequestMethod.GET)
+	public String viewPLaylist(HttpSession session) {
+		Integer uid  = (Integer) session.getAttribute("uid");
+		if(uid != null) {
+			return "forward:/static/views/playlist.html";
+		} else {
+			return "redirect:/";
+		}
+	}
 
 	@RequestMapping(value = "/byuser", method = RequestMethod.GET)
 	@ResponseBody

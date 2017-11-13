@@ -53,7 +53,7 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="p in playlists">
-					<td>{{p.name}}</td>
+					<td><a href="../playlist/view">{{p.name}}</a></td>
 				</tr>
 			</tbody>
 		</table>
