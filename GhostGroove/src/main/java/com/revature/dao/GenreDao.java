@@ -10,7 +10,7 @@ public interface GenreDao {
 
 	public Genre getGenreByName(String g_name);
 
-	public Genre addGenre(Genre genre);
+	public int addGenre(Genre genre);
 
 	public void updateGenre(Genre genre);
 

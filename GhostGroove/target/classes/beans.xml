@@ -25,5 +25,15 @@
 	<mvc:resources location="/WEB-INF/static/" mapping="/static/**"></mvc:resources>
 	
 	<mvc:view-controller path="/" view-name="landing"/>
+	
+	<!-- set up our ViewResolver -->
+	<bean name="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/pages/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value> <!-- JSPs are one of many server-side templating tools -->
+		</property>
+	</bean>
 
 </beans>

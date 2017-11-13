@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity 
 @Table(name="COMMENTS")
 public class Comment implements Serializable{
-	
+
 	
 	private static final long serialVersionUID = 1L;
 

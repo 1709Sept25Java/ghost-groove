@@ -2,37 +2,28 @@ package com.revature.dao;
 
 import java.util.List;
 
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Repository;
 
 import com.revature.domain.Genre;
 
-
-@Transactional
-@Component(value = "genreDao")
-@Scope(value = "prototype")
+@Repository(value="genreDao")
+@Scope(value="session")
 public class GenreDaoImpl implements GenreDao {
 
 	@Autowired
-	public SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 	
 	@Override
 	public List<Genre> getAllGenres() {
-
 		Session s = sessionFactory.getCurrentSession();
-		
-		@SuppressWarnings("unchecked")
-		List<Genre> genres = s.createQuery("from Genres").list();
-			for(Genre genre : genres){
-				System.out.println(genre);
-			}
-		s.close();
+		Transaction tx = s.beginTransaction();
+		List<Genre> genres=s.createQuery("from Genre").list();
+		tx.commit();
 		return genres;
 	}
 
@@ -46,14 +37,13 @@ public class GenreDaoImpl implements GenreDao {
 		return genre;
 	}
 
-	@Override
-	public Genre addGenre(Genre genre) {
+		
+	public int addGenre(Genre genre) {
 		Session s = sessionFactory.getCurrentSession();
 		Transaction tx = s.beginTransaction();
-		s.save(genre);
+		s.saveOrUpdate(genre);
 		tx.commit();
-		s.close();
-		return genre;
+		return genre.getId();
 	}
 
 	@Override

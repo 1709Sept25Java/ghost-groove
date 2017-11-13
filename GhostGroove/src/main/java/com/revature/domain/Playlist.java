@@ -9,7 +9,11 @@ import javax.validation.constraints.NotNull;
 
 @Entity 
 @Table(name="PLAYLIST")
-public class Playlist implements Serializable {
+
+
+
+public class Playlist implements Serializable{
+
 	
 
 	private static final long serialVersionUID = 1L;
@@ -39,7 +43,7 @@ public class Playlist implements Serializable {
 	@OneToMany(mappedBy="playlist",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private List<Comment> comments;
 	
-	@ManyToMany(mappedBy="playlists",fetch=FetchType.LAZY)
+	@ManyToMany(mappedBy="playlists",fetch=FetchType.EAGER)
 	private Set<User> owners;
 	
 	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
@@ -94,5 +98,10 @@ public class Playlist implements Serializable {
 
 	public void setGenreId(Genre genre) {
 		this.genre = genre;
+	}
+
+	@Override
+	public String toString() {
+		return "Playlist [id=" + id + ", name=" + name + ", genre=" + genre + ", owners=" + owners + "]";
 	}
 }

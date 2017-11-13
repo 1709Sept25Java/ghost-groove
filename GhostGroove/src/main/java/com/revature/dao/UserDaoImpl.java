@@ -2,23 +2,25 @@ package com.revature.dao;
 
 import java.util.List;
 
-
-
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.domain.User;
 
 
 @Transactional
-@Component(value = "userDao")
-@Scope(value = "prototype")
+
+@Repository(value="userDao")
+@Scope(value="session")
+
 public class UserDaoImpl implements UserDao {
+	
 
 	@Autowired
 	public SessionFactory sessionFactory;
@@ -36,12 +38,15 @@ public class UserDaoImpl implements UserDao {
 			return users;
 	}
 
-	@Override
-	public User getUserById(int id) {
 
+	@Override
+	public User getUserById(int uId) {
 		Session s = sessionFactory.getCurrentSession();
-		User user = (User) s.get(User.class, id);
-		s.close();
+		Transaction tx = s.beginTransaction();
+		Query q = s.createQuery("from User where id=:idVar");
+		q.setInteger("idVar", uId);
+		User user = (User)q.uniqueResult();
+		tx.commit();
 
 		return user;
 	}
@@ -57,14 +62,16 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User addUser(User user) {
+
 		
+		
+	public int addUser(User user) {
 		Session s = sessionFactory.getCurrentSession();
 		Transaction tx = s.beginTransaction();
-		s.save(user);
+		int result = 0;
+		s.saveOrUpdate(user);
 		tx.commit();
-		s.close();
-		return user;
+		return user.getId();
 	}
 
 	@Override
@@ -86,6 +93,18 @@ public class UserDaoImpl implements UserDao {
 		tx.commit();
 		s.close();
 		
+	}
+
+	@Override
+	public User login(String username, String password) {
+		Session s = sessionFactory.getCurrentSession();
+		Transaction tx = s.beginTransaction();
+		Query q = s.getNamedQuery("login");
+		q.setString("unameVar", username);
+		q.setString("pwVar", password);
+		User u = (User) q.uniqueResult();
+		tx.commit();
+		return u;
 	}
 	
 }

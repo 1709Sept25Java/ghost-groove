@@ -6,12 +6,31 @@ import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@NamedQueries({@NamedQuery(name="login",query="from User where Username=:unameVar and Password=:pwVar")})
+
+@Component(value="user")
+@Scope(value="session")
 @Entity 
 @Table(name="USERS")
 public class User implements Serializable{
 
 
+
 	private static final long serialVersionUID = 1L;
+	
+	public User(String username, String password, String firstname, String lastname, String email, boolean isManager) {
+		super();
+		this.Username = username;
+		this.Password = password;
+		this.Firstname = firstname;
+		this.Lastname = lastname;
+		this.Email = email;
+		this.isManager = isManager;
+	}
+
 
 	public User() {
 		super();
@@ -44,7 +63,7 @@ public class User implements Serializable{
 	@NotNull
 	private boolean isManager;
 	
-	@ManyToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@ManyToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	@JoinTable(name="USER_PLAYLIST",joinColumns= {@JoinColumn(name="U_ID")},inverseJoinColumns= {@JoinColumn(name="P_ID")})
 	private Set<Playlist> playlists;
 	
@@ -97,6 +116,12 @@ public class User implements Serializable{
 	}
 	public void setIsManager(boolean isManager) {
 		this.isManager = isManager;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", Username=" + Username + ", Password=" + Password + ", Firstname=" + Firstname
+				+ ", Lastname=" + Lastname + ", Email=" + Email + ", isManager=" + isManager + "]";
 	}
 
 }

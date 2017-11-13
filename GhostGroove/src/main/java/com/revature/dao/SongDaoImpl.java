@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.revature.domain.Genre;
 import com.revature.domain.Song;
 
 @Transactional
@@ -46,15 +45,6 @@ public class SongDaoImpl implements SongDao {
 		return song;
 	}
 
-	@Override
-	public Song getSongByGenreName(Genre genre) {
-
-		Session s = sessionFactory.getCurrentSession();
-		Song song = (Song) s.get(Song.class, genre.getName());
-		s.close();
-
-		return song;
-	}
 
 	@Override
 	public Song getSongByYoutubeId(int youtubeId) {

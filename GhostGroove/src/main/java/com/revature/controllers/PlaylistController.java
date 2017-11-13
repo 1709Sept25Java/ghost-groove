@@ -1,6 +1,5 @@
 package com.revature.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -16,12 +15,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.revature.dao.*;
 import com.revature.domain.Playlist;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.revature.dao.PlaylistDao;
+import com.revature.dao.UserDao;
+import com.revature.domain.User;
 
 @Controller
-@Scope("session")
+@Scope(value="session")
 @RequestMapping("/playlist")
 
 public class PlaylistController {
@@ -35,39 +43,6 @@ public class PlaylistController {
 	ModelAndView modelAndView = new ModelAndView();
 	@Autowired
 	SessionFactory sessionFactory;
-
-	/*@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/allPlaylists", method = RequestMethod.GET, headers = "Accept=application/json")
-	public List<Playlist> getPlaylists() {
-
-		
-		  HttpServletRequest request String username =
-		  request.getUserPrincipal().getName(); List<Playlist> userPlaylists = new
-		  ArrayList<Playlist>(); UserDaoImpl userDao = new UserDaoImpl(); User user =
-		  userDao.getUserByUsername(username);
-		 
-
-		 if (user != null) {
-		 List<Playlist> listPlaylists = new ArrayList<Playlist>();
-		Playlist listPlaylists = pDao.getPlaylistByName("French Contemporary");
-
-		return userPlaylists;
-		 }
-		System.out.println(listPlaylists.toString());
-		return (List<Playlist>) listPlaylists;
-	}
-
-	/
-	 * @Autowired SongDao songDao;
-	 * 
-	 * @RequestMapping(value = "/addSongPlaylists", method = RequestMethod.POST,
-	 * headers = "Accept=application/json") public Song addSong (@RequestBody Song
-	 * song) {
-	 * 
-	 * songDao.addSong(song); return song;
-	 * 
-	 * }
-	 */
 	
 	@RequestMapping(value = "/sharePlaylist", method = RequestMethod.POST)
 	@Transactional
@@ -98,4 +73,31 @@ public class PlaylistController {
 
 
 	}
+
+
+	@Autowired
+	UserDao uDao;
+	
+	@RequestMapping(value="/byuser",method=RequestMethod.GET)
+	@ResponseBody
+	public List<Playlist> playlistByUser(HttpSession session){
+		Integer id = (Integer)session.getAttribute("uid");
+		List<Playlist> playlists = pDao.playlistsByUser(id);
+		return playlists;
+	}
+	
+	@RequestMapping(value="/add",method=RequestMethod.POST)
+	public String newPlaylist(HttpSession session,@RequestBody Playlist playlist) {
+		Integer uid=(Integer) session.getAttribute("uid");
+		User user = uDao.getUserById(uid);
+		Set<User> owner = new HashSet<>();
+		owner.add(user);
+		playlist.setOwners(owner);
+		System.out.println(playlist);
+		if(pDao.addPlaylist(playlist) != 0) {
+			return "redirect:/user/home";
+		}
+		return "redirect:/user/home";
+	}
+	
 }

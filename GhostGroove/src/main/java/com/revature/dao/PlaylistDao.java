@@ -16,12 +16,15 @@ public interface PlaylistDao {
 
 	public Playlist getPlaylistByGenre(Genre genre);
 
-	public void addPlaylist(Playlist playlist);
+	public int addPlaylist(Playlist playlist);
 
 	public void updatePlaylist(Playlist playlist);
 
 	public void deletePlaylist(Playlist playlist);
 
 	public void sharePlaylist(Playlist playlist, User user);
+	
+	public List<Playlist> playlistsByUser(int uId);
+
 
 }

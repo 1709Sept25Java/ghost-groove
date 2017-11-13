@@ -11,7 +11,6 @@ public interface SongDao {
 
 	public Song getSongById(int id);
 
-	public Song getSongByGenreName(Genre genre);
 
 	public Song getSongByYoutubeId(int youtubeId);
 
