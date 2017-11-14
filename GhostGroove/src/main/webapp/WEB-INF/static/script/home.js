@@ -1,7 +1,7 @@
 var app = angular.module('homeApp',[]);
 
 app.controller('genreCtrl',function($scope,$http){
-	var url = "http://localhost:8082/GhostGroove/genre/all";
+	var url = "http://localhost:8080/GhostGroove/genre/all";
 	$http.get(url).then(function(response){
 		$scope.genres = response.data
 	})
