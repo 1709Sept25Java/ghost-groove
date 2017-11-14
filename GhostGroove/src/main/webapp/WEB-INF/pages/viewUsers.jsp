@@ -41,7 +41,7 @@
 			<tbody>
 				<tr ng-repeat="x in users">
 					<td>{{x.username}}</td>
-					<td>{{x.firstname}} {{x.Lastname}}</td>
+					<td>{{x.firstname}} {{x.lastname}}</td>
 					<td>{{x.email}}</td>
 					<td>{{x.isManager}}</td>
 				</tr>

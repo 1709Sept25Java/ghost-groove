@@ -27,15 +27,11 @@ public class UserDaoImpl implements UserDao {
 	
 	@Override
 	public List<User> getAllUsers() {
-		
-			Session s = sessionFactory.getCurrentSession();
-			@SuppressWarnings("unchecked")
-			List<User> users = s.createQuery("from Users").list();
-				for(User user : users){
-					System.out.println(user);
-				}
-			s.close();
-			return users;
+		Session s = sessionFactory.getCurrentSession();
+		Transaction tx = s.beginTransaction();
+		List<User> users = s.createQuery("from User").list();
+		tx.commit();
+		return users;
 	}
 
 
