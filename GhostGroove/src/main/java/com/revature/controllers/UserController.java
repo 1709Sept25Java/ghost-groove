@@ -62,7 +62,7 @@ public class UserController {
 			session.setAttribute("usename", user.getUsername());
 			session.setAttribute("admin", user.getIsManager());
 			if(user.getIsManager()) {
-				return "redirect:/mgrhome";
+				return "redirect:/user/mgrhome";
 			}
 			else {
 				return "redirect:/user/home";
