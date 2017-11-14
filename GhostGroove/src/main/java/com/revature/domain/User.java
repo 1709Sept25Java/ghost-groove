@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @NamedQueries({@NamedQuery(name="login",query="from User where Username=:unameVar and Password=:pwVar")})
 
 @Component(value="user")
@@ -63,6 +65,7 @@ public class User implements Serializable{
 	@NotNull
 	private boolean isManager;
 	
+	@JsonIgnore
 	@ManyToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	@JoinTable(name="USER_PLAYLIST",joinColumns= {@JoinColumn(name="U_ID")},inverseJoinColumns= {@JoinColumn(name="P_ID")})
 	private Set<Playlist> playlists;
